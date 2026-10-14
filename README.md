@@ -1,5 +1,16 @@
 # AIOT-1014-DIC: 50 Startups 多元線性迴歸與特徵選擇比較分析
 
+## 🔗 相關連結與展示
+
+* **GitHub 連結**：https://github.com/czk001167-hash/AIOT-1014-DIC
+* **網頁連結**：https://czk001167-hash.github.io/AIOT-1014-DIC/
+
+### 📊 平台畫面截圖
+
+![5大特徵選擇演算法分析平台](screenshot.png)
+
+---
+
 本專案遵循 **CRISP-DM（Cross-Industry Standard Process for Data Mining）** 流程，針對新創公司數據集（`50_Startups.csv`）進行深度探索、特徵工程、多重共線性診斷，並系統性評估 **5 大特徵選擇演算法（Feature Selection Algorithms）** 在特徵維度 $k = 1 \sim 5$ 下對多元線性迴歸模型預測利潤（`Profit`）的影響與泛化能力。
 
 專案同時包含以原生 Web 技術建構之**現代化互動式決策與預測儀表板**（Glassmorphism UI），提供即時利潤預估、特徵重要性分析與跨演算法比較。
@@ -79,6 +90,7 @@ AIOT-1014-DIC/
 ├── index.html                             # 現代化 Web 決策與實時利潤預測儀表板
 ├── app.js                                 # 儀表板交互邏輯與 Chart.js 數據視覺化
 ├── style.css                              # Glassmorphism 風格深色/質感 CSS 設計
+├── screenshot.png                         # 5大特徵選擇演算法分析平台畫面截圖
 ├── requirements.txt                       # Python 相依套件清單
 └── README.md                              # 專案詳細文檔
 ```
@@ -137,3 +149,7 @@ python -m http.server 8080
 2. **演算法選擇建議**：
    * 當候選特徵維度較小（如 $< 15$）時，優先採用 **Exhaustive Search（最佳子集法）**，能有效避免貪婪法的局部最優陷阱。
    * 當特徵維度龐大時，**Lasso (L1 Regularization)** 是兼顧計算效率與稀疏穩定性的首選。
+
+---
+
+
