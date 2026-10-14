@@ -42,53 +42,70 @@ const APP_DATA = {
       }
     },
     algorithms: {
-      "SelectKBest": {
-        name: "SelectKBest (Filter)",
-        color: "#6366f1",
+      "Lasso": {
+        name: "Lasso (L1 Ranking)",
+        color: "#1f77b4",
+        pointStyle: "circle",
         data: [
-          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "基線單變數" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 全域最佳" },
-          { k: 3, features: ["R&D Spend", "Marketing Spend", "Administration"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "行政支出引入微噪" },
-          { k: 4, features: ["R&D Spend", "Marketing Spend", "Administration", "State_New York"], rmse: 8997.20, r2: 0.9367, status: "warn", desc: "多增紐約虛擬變數" },
-          { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_New York", "State_Florida"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵過擬合" }
+          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "最強正則首選" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 雙變數最佳" },
+          { k: 3, features: ["R&D Spend", "Marketing Spend", "State_New York"], rmse: 8309.06, r2: 0.9460, status: "good", desc: "保留紐約虛擬變數" },
+          { k: 4, features: ["R&D Spend", "Marketing Spend", "State_Florida", "State_New York"], rmse: 8409.92, r2: 0.9447, status: "good", desc: "雙州別虛擬變數" },
+          { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵退化" }
+        ]
+      },
+      "Sequential_Selection": {
+        name: "Forward SFS",
+        color: "#ff7f0e",
+        pointStyle: "rect",
+        data: [
+          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "前向 CV 最高" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 雙變數最佳" },
+          { k: 3, features: ["R&D Spend", "Administration", "Marketing Spend"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "前向貪婪陷阱" },
+          { k: 4, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida"], rmse: 9068.54, r2: 0.9357, status: "warn", desc: "加入佛州" },
+          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵" }
         ]
       },
       "RFE": {
-        name: "RFE (Wrapper)",
-        color: "#10b981",
+        name: "RFE",
+        color: "#2ca02c",
+        pointStyle: "triangle",
         data: [
-          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "最強標準化權重" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 全域最佳" },
+          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "標準化權重最高" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 雙變數最佳" },
           { k: 3, features: ["R&D Spend", "Administration", "Marketing Spend"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "數值特徵全選" },
           { k: 4, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida"], rmse: 9068.54, r2: 0.9357, status: "warn", desc: "保留佛州特徵" },
           { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵" }
         ]
       },
-      "Sequential_Selection": {
-        name: "SFS (Forward Wrapper)",
-        color: "#f59e0b",
+      "ElasticNet": {
+        name: "ElasticNet Ranking",
+        color: "#d62728",
+        pointStyle: "rectRot",
         data: [
-          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "前向 CV 最高" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 全域最佳" },
-          { k: 3, features: ["R&D Spend", "Administration", "Marketing Spend"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "前向貪婪加入" },
-          { k: 4, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida"], rmse: 9068.54, r2: 0.9357, status: "warn", desc: "CV 增益放緩" },
-          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵" }
+          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "L1+L2 混合正則首選" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 雙變數最佳" },
+          { k: 3, features: ["R&D Spend", "Marketing Spend", "Administration"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "行政支出引入微噪" },
+          { k: 4, features: ["R&D Spend", "Marketing Spend", "Administration", "State_New York"], rmse: 8997.20, r2: 0.9367, status: "warn", desc: "納入紐約州" },
+          { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_New York", "State_Florida"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵" }
         ]
       },
-      "Lasso": {
-        name: "Lasso (Embedded)",
-        color: "#06b6d4",
+      "Exhaustive_Search": {
+        name: "Exhaustive Search",
+        color: "#9467bd",
+        pointStyle: "triangle",
         data: [
-          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "L1 正則最大保留項" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "🏆 全域最佳" },
-          { k: 3, features: ["R&D Spend", "Marketing Spend", "Administration"], rmse: 8803.78, r2: 0.9394, status: "warn", desc: "進入係數小幅劣化" },
-          { k: 4, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida"], rmse: 9068.54, r2: 0.9357, status: "warn", desc: "稀疏性鬆綁" },
-          { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "無懲罰 OLS 極限" }
+          { k: 1, features: ["R&D Spend"], rmse: 8274.87, r2: 0.9465, status: "good", desc: "單項全域最佳" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8198.80, r2: 0.9474, status: "gold", desc: "雙變數全域最佳" },
+          { k: 3, features: ["R&D Spend", "Administration", "State_Florida"], rmse: 8171.65, r2: 0.9478, status: "gold", desc: "🏆 突破貪婪陷阱 全域最低 RMSE" },
+          { k: 4, features: ["R&D Spend", "Administration", "State_Florida", "State_New York"], rmse: 8178.37, r2: 0.9477, status: "gold", desc: "四特徵最優組合" },
+          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9137.99, r2: 0.9347, status: "poor", desc: "全特徵" }
         ]
       },
       "VIF": {
         name: "VIF (Collinearity Diagnostic)",
         color: "#f43f5e",
+        pointStyle: "crossRot",
         data: [
           { k: 1, features: ["Marketing Spend"], rmse: 25529.05, r2: 0.4904, status: "poor", desc: "失去 R&D, 預測力潰縮" },
           { k: 2, features: ["Marketing Spend", "State_New York"], rmse: 28603.15, r2: 0.3603, status: "poor", desc: "缺乏核心解釋力" },
@@ -137,31 +154,22 @@ const APP_DATA = {
       }
     },
     algorithms: {
-      "SelectKBest": {
-        name: "SelectKBest (Filter)",
-        color: "#6366f1",
+      "Lasso": {
+        name: "Lasso (L1 Ranking)",
+        color: "#1f77b4",
+        pointStyle: "circle",
         data: [
           { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "單特徵最佳" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "次優雙特徵" },
-          { k: 3, features: ["R&D Spend", "Marketing Spend", "State_New York"], rmse: 8242.78, r2: 0.9161, status: "good", desc: "三特徵平穩" },
-          { k: 4, features: ["R&D Spend", "Marketing Spend", "State_New York", "State_Florida"], rmse: 8254.69, r2: 0.9159, status: "good", desc: "加入佛州" },
-          { k: 5, features: ["R&D Spend", "Marketing Spend", "State_New York", "State_Florida", "Administration"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全特徵退化" }
-        ]
-      },
-      "RFE": {
-        name: "RFE (Wrapper)",
-        color: "#10b981",
-        data: [
-          { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "單特徵最佳" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "次優雙特徵" },
-          { k: 3, features: ["R&D Spend", "Administration", "Marketing Spend"], rmse: 8995.91, r2: 0.9001, status: "warn", desc: "行政支出加入" },
-          { k: 4, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida"], rmse: 9055.96, r2: 0.8987, status: "warn", desc: "誤差擴大" },
-          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全模型" }
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "雙變數" },
+          { k: 3, features: ["R&D Spend", "Marketing Spend", "Administration"], rmse: 8995.91, r2: 0.9001, status: "warn", desc: "弱正則" },
+          { k: 4, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida"], rmse: 9055.96, r2: 0.8987, status: "warn", desc: "多變數" },
+          { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全特徵" }
         ]
       },
       "Sequential_Selection": {
-        name: "SFS (Forward Wrapper)",
-        color: "#f59e0b",
+        name: "Forward SFS",
+        color: "#ff7f0e",
+        pointStyle: "rect",
         data: [
           { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "CV 最佳單項" },
           { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "雙特徵" },
@@ -170,20 +178,46 @@ const APP_DATA = {
           { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全特徵" }
         ]
       },
-      "Lasso": {
-        name: "Lasso (Embedded)",
-        color: "#06b6d4",
+      "RFE": {
+        name: "RFE",
+        color: "#2ca02c",
+        pointStyle: "triangle",
         data: [
-          { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "L1 首選" },
-          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "雙項" },
+          { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "單特徵最佳" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "次優雙特徵" },
+          { k: 3, features: ["R&D Spend", "Administration", "Marketing Spend"], rmse: 8995.91, r2: 0.9001, status: "warn", desc: "行政支出加入" },
+          { k: 4, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida"], rmse: 9055.96, r2: 0.8987, status: "warn", desc: "誤差擴大" },
+          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全模型" }
+        ]
+      },
+      "ElasticNet": {
+        name: "ElasticNet Ranking",
+        color: "#d62728",
+        pointStyle: "rectRot",
+        data: [
+          { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "單特徵最佳" },
+          { k: 2, features: ["R&D Spend", "Marketing Spend"], rmse: 8206.33, r2: 0.9168, status: "good", desc: "次優雙特徵" },
           { k: 3, features: ["R&D Spend", "Marketing Spend", "Administration"], rmse: 8995.91, r2: 0.9001, status: "warn", desc: "弱正則" },
           { k: 4, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida"], rmse: 9055.96, r2: 0.8987, status: "warn", desc: "多變數" },
           { k: 5, features: ["R&D Spend", "Marketing Spend", "Administration", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全特徵" }
         ]
       },
+      "Exhaustive_Search": {
+        name: "Exhaustive Search",
+        color: "#9467bd",
+        pointStyle: "triangle",
+        data: [
+          { k: 1, features: ["R&D Spend"], rmse: 7714.33, r2: 0.9265, status: "gold", desc: "單特徵最佳" },
+          { k: 2, features: ["R&D Spend", "State_New York"], rmse: 7718.10, r2: 0.9264, status: "good", desc: "非貪婪雙特徵" },
+          { k: 3, features: ["R&D Spend", "State_Florida", "State_New York"], rmse: 7946.37, r2: 0.9220, status: "good", desc: "非貪婪三特徵" },
+          { k: 4, features: ["R&D Spend", "Marketing Spend", "State_Florida", "State_New York"], rmse: 8254.69, r2: 0.9159, status: "good", desc: "加入行銷支出" },
+          { k: 5, features: ["R&D Spend", "Administration", "Marketing Spend", "State_Florida", "State_New York"], rmse: 9055.96, r2: 0.8987, status: "poor", desc: "全特徵" }
+        ]
+      },
       "VIF": {
         name: "VIF (Collinearity Diagnostic)",
         color: "#f43f5e",
+        pointStyle: "crossRot",
         data: [
           { k: 1, features: ["Administration"], rmse: 31056.94, r2: -0.1911, status: "poor", desc: "極低共線性但無預測力" },
           { k: 2, features: ["Administration", "State_Florida"], rmse: 30236.10, r2: -0.1290, status: "poor", desc: "負向判定係數" },
@@ -212,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPredictor();
   initTableSearch();
   initExport();
+  initLightbox();
 });
 
 // Tab Navigation
@@ -387,8 +422,9 @@ function updateCharts() {
   const datasetsRmse = [];
   const datasetsR2 = [];
 
+  // When 'all' is selected, display the 5 benchmark algorithms matching the reference plot
   const keysToInclude = (activeAlgoFilter === "all") 
-    ? Object.keys(currentAlgos) 
+    ? ["Lasso", "Sequential_Selection", "RFE", "ElasticNet", "Exhaustive_Search"] 
     : [activeAlgoFilter];
 
   keysToInclude.forEach(key => {
@@ -396,7 +432,25 @@ function updateCharts() {
     if (!algo) return;
 
     const isSingle = (keysToInclude.length === 1);
-    const lineColor = isSingle ? "#1f77b4" : algo.color; // Match user screenshot color when single
+    const lineColor = isSingle ? "#1f77b4" : algo.color;
+
+    // Matplotlib matching point markers
+    let pointStyle = 'circle';
+    let pointRotation = 0;
+    if (key === 'Lasso') {
+      pointStyle = 'circle'; // 'o'
+    } else if (key === 'Sequential_Selection') {
+      pointStyle = 'rect'; // 's'
+    } else if (key === 'RFE') {
+      pointStyle = 'triangle'; // '^'
+    } else if (key === 'ElasticNet') {
+      pointStyle = 'rectRot'; // 'D'
+    } else if (key === 'Exhaustive_Search') {
+      pointStyle = 'triangle';
+      pointRotation = 180; // 'v'
+    } else if (key === 'VIF') {
+      pointStyle = 'crossRot';
+    }
     
     datasetsRmse.push({
       label: algo.name,
@@ -405,9 +459,11 @@ function updateCharts() {
       borderColor: lineColor,
       backgroundColor: lineColor,
       borderWidth: 2.2,
-      pointRadius: 5,
-      pointHoverRadius: 8,
-      tension: 0.15
+      pointStyle: pointStyle,
+      pointRotation: pointRotation,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+      tension: 0.1
     });
 
     datasetsR2.push({
@@ -417,16 +473,18 @@ function updateCharts() {
       borderColor: lineColor,
       backgroundColor: lineColor,
       borderWidth: 2.2,
-      pointRadius: 5,
-      pointHoverRadius: 8,
-      tension: 0.15
+      pointStyle: pointStyle,
+      pointRotation: pointRotation,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+      tension: 0.1
     });
   });
 
   rmseChartInstance.data.datasets = datasetsRmse;
   r2ChartInstance.data.datasets = datasetsR2;
 
-  // Custom styling when single algo is selected to match user's screenshot
+  // Custom styling when single algo is selected
   if (keysToInclude.length === 1) {
     document.getElementById("rmse-chart-title").textContent = `${currentAlgos[keysToInclude[0]].name}: RMSE by Number of Features`;
     document.getElementById("r2-chart-title").textContent = `${currentAlgos[keysToInclude[0]].name}: R-squared by Number of Features`;
@@ -654,5 +712,37 @@ function initExport() {
     a.download = `feature_selection_comparison_rs${currentRandomState}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+  });
+}
+
+// 8. LIGHTBOX MODAL FOR BENCHMARK MASTER PLOT
+function initLightbox() {
+  const modal = document.getElementById("benchmark-lightbox");
+  const openBtn = document.getElementById("btn-zoom-benchmark");
+  const imgContainer = document.getElementById("benchmark-img-container");
+  const closeBtn = document.getElementById("lightbox-close-btn");
+  const backdrop = document.getElementById("lightbox-backdrop");
+
+  if (!modal) return;
+
+  const openModal = () => {
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  };
+
+  if (openBtn) openBtn.addEventListener("click", openModal);
+  if (imgContainer) imgContainer.addEventListener("click", openModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      closeModal();
+    }
   });
 }
