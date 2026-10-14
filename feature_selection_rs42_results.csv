@@ -1,0 +1,26 @@
+Algorithm,Number of Features,Selected Features,RMSE,R-squared
+SelectKBest (Filter),1,['R&D Spend'],7714.334890830185,0.9265108109341951
+SelectKBest (Filter),2,"['R&D Spend', 'Marketing Spend']",8206.32881316585,0.9168381183550247
+SelectKBest (Filter),3,"['R&D Spend', 'Marketing Spend', 'State_New York']",8242.782649484654,0.9160976403529224
+SelectKBest (Filter),4,"['R&D Spend', 'Marketing Spend', 'State_New York', 'State_Florida']",8254.686589386352,0.9158551276280779
+SelectKBest (Filter),5,"['R&D Spend', 'Marketing Spend', 'State_New York', 'State_Florida', 'Administration']",9055.95732345848,0.8987266414328634
+RFE (Wrapper),1,['R&D Spend'],7714.334890830185,0.9265108109341951
+RFE (Wrapper),2,"['R&D Spend', 'Marketing Spend']",8206.32881316585,0.9168381183550247
+RFE (Wrapper),3,"['R&D Spend', 'Administration', 'Marketing Spend']",8995.905803361416,0.900065308303732
+RFE (Wrapper),4,"['R&D Spend', 'Administration', 'Marketing Spend', 'State_Florida']",9055.95775223374,0.89872663184282
+RFE (Wrapper),5,"['R&D Spend', 'Administration', 'Marketing Spend', 'State_Florida', 'State_New York']",9055.957323458471,0.8987266414328636
+Sequential Selection (SFS),1,['R&D Spend'],7714.334890830185,0.9265108109341951
+Sequential Selection (SFS),2,"['R&D Spend', 'Marketing Spend']",8206.32881316585,0.9168381183550247
+Sequential Selection (SFS),3,"['R&D Spend', 'Administration', 'Marketing Spend']",8995.905803361416,0.900065308303732
+Sequential Selection (SFS),4,"['R&D Spend', 'Administration', 'Marketing Spend', 'State_New York']",9015.112541592189,0.8996381209727398
+Sequential Selection (SFS),5,"['R&D Spend', 'Administration', 'Marketing Spend', 'State_Florida', 'State_New York']",9055.957323458471,0.8987266414328636
+Lasso (Embedded),1,['R&D Spend'],7714.334890830185,0.9265108109341951
+Lasso (Embedded),2,"['R&D Spend', 'Marketing Spend']",8206.32881316585,0.9168381183550247
+Lasso (Embedded),3,"['R&D Spend', 'Marketing Spend', 'Administration']",8995.905803361411,0.9000653083037322
+Lasso (Embedded),4,"['R&D Spend', 'Marketing Spend', 'Administration', 'State_Florida']",9055.957752233726,0.8987266318428204
+Lasso (Embedded),5,"['R&D Spend', 'Marketing Spend', 'Administration', 'State_Florida', 'State_New York']",9055.95732345846,0.8987266414328638
+VIF Multicollinearity,1,['Administration'],31056.942022688254,-0.19108803250893636
+VIF Multicollinearity,2,"['Administration', 'State_Florida']",30236.09538771769,-0.1289582770572839
+VIF Multicollinearity,3,"['R&D Spend', 'Administration', 'State_Florida']",9284.310511935364,0.8935548710812296
+VIF Multicollinearity,4,"['R&D Spend', 'Administration', 'State_Florida', 'State_New York']",9316.53640890293,0.892814645292597
+VIF Multicollinearity,5,"['R&D Spend', 'Administration', 'Marketing Spend', 'State_Florida', 'State_New York']",9055.957323458471,0.8987266414328636

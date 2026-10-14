@@ -1,0 +1,6 @@
+Number of Features,Selected Features,RMSE,R-squared
+1,['R&D Spend'],7714.334890830185,0.9265108109341951
+2,"['R&D Spend', 'Marketing Spend']",8206.32881316585,0.9168381183550247
+3,"['R&D Spend', 'Marketing Spend', 'Administration']",8995.905803361411,0.9000653083037322
+4,"['R&D Spend', 'Marketing Spend', 'Administration', 'State_Florida']",9055.957752233726,0.8987266318428204
+5,"['R&D Spend', 'Marketing Spend', 'Administration', 'State_Florida', 'State_New York']",9055.95732345846,0.8987266414328638
